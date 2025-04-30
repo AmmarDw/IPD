@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+            rel="stylesheet"
+            as="style"
+            onload="this.rel='stylesheet'"
+            href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+    <title>Clinic Assist – Sign In</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+</head>
+<body class="min-h-screen bg-white font-sans">
+<div class="flex flex-col h-full">
+    <header class="flex items-center justify-between border-b border-gray-200 px-10 py-4">
+        <!-- Logo + Title -->
+        <div class="flex items-center gap-4">
+            <svg class="w-6 h-6 text-gray-900" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z"
+                        fill="currentColor"
+                />
+            </svg>
+            <h1 class="text-xl font-bold text-gray-900">Clinic Assist</h1>
+        </div>
+
+        <!-- Assist + Logout buttons -->
+        <div class="flex items-center gap-4">
+            <!-- Logout form/button -->
+            <form action="http://localhost:8080/logout" method="post">
+                <button
+                        type="submit"
+                        class="flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-xl font-bold transition"
+                >
+                    <!-- Logout Icon (Heroicons “logout” arrow) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M17 16l4-4m0 0l-4-4m4 4H7" />
+                    </svg>
+                    Logout
+                </button>
+            </form>
+
+            <!-- Your existing Assist button -->
+            <button
+                    class="flex items-center gap-2 bg-gray-200 px-3 py-2 rounded-xl text-gray-900 font-bold hover:bg-gray-300 transition"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 256 256">
+                    <path
+                            d="M212,152a12,12,0,1,1-12-12A12,12,0,0,1,212,152Zm-4.55,39.29A48.08,48.08,0,0,1,160,232H136a48.05,48.05,0,0,1-48-48V143.49A64,64,0,0,1,32,80V40A16,16,0,0,1,48,24H64a8,8,0,0,1,0,16H48V80a48,48,0,0,0,48.64,48c26.11-.34,47.36-22.25,47.36-48.83V40H128a8,8,0,0,1,0-16h16a16,16,0,0,1,16,16V79.17c0,32.84-24.53,60.29-56,64.31V184a32,32,0,0,0,32,32h24a32.06,32.06,0,0,0,31.22-25,40,40,0,1,1,16.23.27ZM224,152a24,24,0,1,0-24,24A24,24,0,0,0,224,152Z"
+                    />
+                </svg>
+                Assist
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow flex items-center justify-center px-4">
+        <div class="w-full max-w-md py-10">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-2">Please sign in</h2>
+            <p class="text-center text-gray-600 mb-6">
+                If you are a registered nurse, please log in to your account.
+            </p>
+
+            <form
+                    action="http://localhost:8080/login"
+                    method="post"
+                    class="space-y-6"
+            >
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-900 mb-1">
+                        Email Address
+                    </label>
+                    <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            required
+                            autocomplete="email"
+                            placeholder="nurse.olivia.carter@clinic.com"
+                            class="w-full rounded-xl border border-gray-300 p-4 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-900 mb-1">
+                        Password
+                    </label>
+                    <input
+                            id="password"
+                            name="password"
+                            type="password"
+                            required
+                            autocomplete="current-password"
+                            placeholder="Enter password"
+                            class="w-full rounded-xl border border-gray-300 p-4 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                </div>
+
+                <button
+                        type="submit"
+                        class="w-full rounded-xl bg-blue-600 py-3 font-bold text-white hover:bg-blue-700 transition"
+                >
+                    Sign In
+                </button>
+            </form>
+        </div>
+    </main>
+</div>
+</body>
+</html>

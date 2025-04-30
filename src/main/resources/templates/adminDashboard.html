@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+            rel="stylesheet"
+            as="style"
+            onload="this.rel='stylesheet'"
+            href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter:wght@400;500;700;900&amp;family=Noto+Sans:wght@400;500;700;900"
+    />
+    <title>Clinic Assist – Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+</head>
+<body class="min-h-screen flex flex-col bg-white font-sans">
+<!-- header -->
+<header class="flex items-center justify-between border-b border-gray-200 px-8 py-4">
+    <div class="flex items-center gap-3">
+        <svg class="w-6 h-6 text-gray-900" viewBox="0 0 48 48" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                    fill-rule="evenodd" clip-rule="evenodd"
+                    d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z"
+            />
+        </svg>
+        <h1 class="text-xl font-bold text-gray-900">Clinic Assist</h1>
+    </div>
+</header>
+
+<!-- main -->
+<main class="flex-grow flex items-center justify-center px-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full">
+        <a href="/manageRequestOptions"
+           class="flex flex-col items-center gap-4 bg-white rounded-2xl shadow p-8 text-center hover:bg-gray-50 transform hover:scale-105 transition">
+            <div class="text-5xl">⚙️</div>
+            <h2 class="text-xl font-bold text-gray-900">Manage Request Options</h2>
+        </a>
+
+        <a href="/viewAllEmployees"
+           class="flex flex-col items-center gap-4 bg-white rounded-2xl shadow p-8 text-center hover:bg-gray-50 transform hover:scale-105 transition">
+            <div class="text-5xl">👥</div>
+            <h2 class="text-xl font-bold text-gray-900">Monitor Employees</h2>
+        </a>
+    </div>
+</main>
+</body>
+</html>
