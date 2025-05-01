@@ -36,4 +36,8 @@ public class EmployeeService {
         }
         return employeeRepository.findByRole_RoleIdInAndStatusOrderByEmployeeId(roleIds, statusBool);
     }
+
+    // TODO Salem task
+    // create findEmployee that calls the EmployeeRepository proper function
+    // - maybe findByEmployeeId or getEmployeeByEmployeeId ask gbt for it
 }

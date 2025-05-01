@@ -29,7 +29,8 @@ public class AuthController {
             return "redirect:/adminDashboard";
         }
         if (roles.contains(new SimpleGrantedAuthority("ROLE_NURSE")) ||
-                roles.contains(new SimpleGrantedAuthority("ROLE_DOCTOR"))) {
+                roles.contains(new SimpleGrantedAuthority("ROLE_DOCTOR")) ||
+                roles.contains(new SimpleGrantedAuthority("ROLE_HOUSEKEEPING"))) {
             return "redirect:/employeeTasksDashboard";
         }
         if (roles.contains(new SimpleGrantedAuthority("ROLE_PATIENT"))) {

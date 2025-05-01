@@ -57,7 +57,8 @@ public class SecurityConfig {
                                 "/addRequestOption",
                                 "/updateRequestOptionForm",
                                 "/updateRequestOption",
-                                "/deleteRequestOption")
+                                "/deleteRequestOption",
+                                "/employeeTasksDashboard")
                         .hasRole("ADMIN")
 
                         // medical staff & admin endpoints
@@ -67,7 +68,7 @@ public class SecurityConfig {
                                 "/startTask",
                                 "/completeTask",
                                 "/updateEmployeeStatus"
-                        ).hasAnyRole("NURSE", "DOCTOR", "ADMIN")
+                        ).hasAnyRole("NURSE", "DOCTOR", "HOUSEKEEPING")
 
                         // patient & nurse endpoints
                         .requestMatchers("/requestOptions", "/requestHelp")
