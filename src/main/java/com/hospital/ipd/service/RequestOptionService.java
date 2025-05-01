@@ -66,4 +66,6 @@ public class RequestOptionService {
         // If it exists, return it, else return null or throw an exception (depends on your use case)
         return option.orElse(null);  // Or throw an exception if preferred
     }
+
+    // create findAllOptions: findAll from RequestOptionRepository
 }

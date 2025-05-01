@@ -138,4 +138,9 @@ public class HelpRequestController {
         requestOptionService.deleteById(optionId);
         return "redirect:/manageRequestOptions";
     }
+
+    // @GetMapping("/requestOptions") communicate with RequestOptionsService call findAllOptions
+    // return html page injected with the requestOptions returned from the service
+    // use thymleaf for rendering the data sent from the controller
+    // copy the manageRequestOptions.html and viewAllEmployees.html to gbt and ask for the same table layout
 }
