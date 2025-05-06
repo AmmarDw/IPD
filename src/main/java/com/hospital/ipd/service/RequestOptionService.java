@@ -1,14 +1,15 @@
 package com.hospital.ipd.service;
 
-import com.hospital.ipd.model.PriorityEnum;
-import com.hospital.ipd.model.RequestOption;
-import com.hospital.ipd.repository.RequestOptionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.hospital.ipd.model.PriorityEnum;
+import com.hospital.ipd.model.RequestOption;
+import com.hospital.ipd.repository.RequestOptionRepository;
 
 @Service
 public class RequestOptionService {
@@ -68,4 +69,10 @@ public class RequestOptionService {
     }
 
     // create findAllOptions: findAll from RequestOptionRepository
+    /**
+ * Fetch all RequestOptions without any filtering.
+ */
+    public List<RequestOption> findAllOptions() {
+        return requestOptionRepository.findAll();
+    }
 }

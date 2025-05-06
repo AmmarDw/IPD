@@ -16,8 +16,8 @@ public class SecurityConfig {
      */
     @Bean
     public PasswordEncoder passwordEncoder() {
-        // Use BCrypt for secure password hashing
-        return new BCryptPasswordEncoder();
+        // Explicitly set strength to 10 to match $2a$10$ hashes
+        return new BCryptPasswordEncoder(10);
     }
 
     /**
@@ -45,8 +45,8 @@ public class SecurityConfig {
                         // static assets (CSS, JS, images) are public
                         .requestMatchers("/assets/**", "/css/**", "/js/**", "/images/**").permitAll()
 
-                        // login page must be accessible without authentication
-                        .requestMatchers("/login").permitAll()
+                        // login and signup pages must be accessible without authentication
+                        .requestMatchers("/login", "/signup").permitAll()
 
                         // admin-only endpoints
                         .requestMatchers(
@@ -57,8 +57,8 @@ public class SecurityConfig {
                                 "/addRequestOption",
                                 "/updateRequestOptionForm",
                                 "/updateRequestOption",
-                                "/deleteRequestOption",
-                                "/employeeTasksDashboard")
+                                "/deleteRequestOption")
+                             //   "/employeeTasksDashboard")
                         .hasRole("ADMIN")
 
                         // medical staff & admin endpoints
@@ -81,7 +81,7 @@ public class SecurityConfig {
                 // form-login configuration
                 .formLogin(form -> form
                         .loginPage("/login")       // custom login page
-                        .usernameParameter("email")      // ← bind Spring’s “username” to your “email” field
+                        .usernameParameter("email") // ← bind Spring’s “username” to your “email” field
                         .passwordParameter("password")
                         .defaultSuccessUrl("/postLogin", true) // landing page after login
                         .permitAll()

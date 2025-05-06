@@ -1,25 +1,42 @@
 package com.hospital.ipd.controller;
 
-import com.hospital.ipd.model.PriorityEnum;
-import com.hospital.ipd.model.RequestOption;
-import com.hospital.ipd.model.Role;
-import com.hospital.ipd.service.RequestOptionService;
-import com.hospital.ipd.service.RoleService;
-import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.hospital.ipd.model.Patient;
+import com.hospital.ipd.model.PriorityEnum;
+import com.hospital.ipd.model.RequestOption;
+import com.hospital.ipd.model.Role;
+import com.hospital.ipd.model.Task;
+import com.hospital.ipd.repository.PatientRepository;
+import com.hospital.ipd.repository.TaskRepository;
+import com.hospital.ipd.service.RequestOptionService;
+import com.hospital.ipd.service.RoleService;
+
+import jakarta.servlet.http.HttpServletRequest;
+
 
 @Controller
 public class HelpRequestController {
 
     @Autowired
     private RequestOptionService requestOptionService;
+    
+    @Autowired
+    private TaskRepository taskRepo;
+
+    @Autowired
+    private PatientRepository patientRepo;
 
     @Autowired
     private RoleService roleService;
@@ -143,4 +160,40 @@ public class HelpRequestController {
     // return html page injected with the requestOptions returned from the service
     // use thymleaf for rendering the data sent from the controller
     // copy the manageRequestOptions.html and viewAllEmployees.html to gbt and ask for the same table layout
+    @GetMapping("/requestOptions")
+    public String viewRequestOptions(Model model) {
+        List<RequestOption> options = requestOptionService.findAllOptions();
+        model.addAttribute("options", options);
+    return "requestOptions";
+}
+
+@PostMapping("/requestHelp")
+public String requestHelp(
+        @RequestParam("optionId") int optionId,
+        Authentication auth
+) {
+    String email = auth.getName();  // Get currently logged-in patient's email
+    Patient patient = patientRepo.findByEmail(email);
+
+    if (patient == null) {
+        System.out.println("❌ Patient not found for email: " + email);
+        return "redirect:/login?error";
+    }
+
+    RequestOption selectedOption = requestOptionService.getRequestOptionById(optionId);
+
+    Task task = new Task();
+    task.setRequestedBy(patient);
+    task.setRequestOption(selectedOption);
+    task.setTimestamp(LocalDateTime.now());
+    task.setStatus(false); // false = not yet completed
+    taskRepo.save(task);
+
+    System.out.println(" Task saved for patient: " + email + " - Option: " + selectedOption.getDescription());
+
+    return "redirect:/requestOptions";
+}
+
+
+
 }
