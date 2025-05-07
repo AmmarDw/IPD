@@ -58,8 +58,8 @@ public class SecurityConfig {
                                 "/addRequestOption",
                                 "/updateRequestOptionForm",
                                 "/updateRequestOption",
-                                "/deleteRequestOption")
-                             //   "/employeeTasksDashboard")
+                                "/deleteRequestOption"),
+                                "/employeeTasksDashboard")
                         .hasRole("ADMIN")
 
                         // medical staff & admin endpoints
