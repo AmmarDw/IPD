@@ -11,84 +11,57 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-    /**
-     * 1) PasswordEncoder bean for hashing and verifying passwords.
-     */
     @Bean
-
     public PasswordEncoder passwordEncoder() {
-        // Explicitly set strength to 10 to match $2a$10$ hashes
         return new BCryptPasswordEncoder(10);
     }
 
-    /**
-     * 2) Main security filter chain.
-     *    - wires in our custom AuthenticationProvider
-     *    - disables CSRF for simplicity
-     *    - configures URL authorization rules
-     *    - sets up form-login and logout
-     */
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(
             HttpSecurity http,
             IpDAuthenticationProvider authProvider
     ) throws Exception {
-
         http
-                // use our custom authentication logic (employees & patients)
                 .authenticationProvider(authProvider)
+                .csrf(csrf -> csrf.disable()) // More modern syntax
 
-                // disable CSRF for simplicity (enable if you need CSRF protection)
-                .csrf().disable()
-
-                // URL authorization
                 .authorizeHttpRequests(auth -> auth
-                        // static assets (CSS, JS, images) are public
+                        // Public assets
                         .requestMatchers("/assets/**", "/css/**", "/js/**", "/images/**").permitAll()
 
-                        // login and signup pages must be accessible without authentication
+                        // Public pages
                         .requestMatchers("/login", "/signup").permitAll()
 
-                        // admin-only endpoints
+                        // Admin-only endpoints
                         .requestMatchers(
                                 "/admin/**",
                                 "/viewAllEmployees",
                                 "/adminDashboard",
-                                "/manageRequestOptions",
-                                "/addRequestOption",
-                                "/updateRequestOptionForm",
-                                "/updateRequestOption",
-                                "/deleteRequestOption")
-                             //   "/employeeTasksDashboard")
-                        .hasRole("ADMIN")
+                                "/manageRequestOptions/**"
+                        ).hasRole("ADMIN")
 
-                        // medical staff & admin endpoints
+                        // Employee tasks dashboard - now accessible by both admin and medical staff
+                        .requestMatchers("/employeeTasksDashboard").hasAnyRole("ADMIN", "NURSE", "DOCTOR", "HOUSEKEEPING")
+
+                        // Medical staff endpoints
                         .requestMatchers(
-                                "/employeeTasksDashboard",
                                 "/viewTask",
                                 "/startTask",
-                                "/completeTask",
-                                "/updateEmployeeStatus"
+                                "/completeTask"
                         ).hasAnyRole("NURSE", "DOCTOR", "HOUSEKEEPING")
 
-                        // patient & nurse endpoints
-                        .requestMatchers("/requestOptions", "/requestHelp")
-                        .hasRole("PATIENT")
+                        // Patient endpoints
+                        .requestMatchers("/requestOptions", "/requestHelp").hasRole("PATIENT")
 
-                        // any other request requires authentication
                         .anyRequest().authenticated()
                 )
-
-                // form-login configuration
                 .formLogin(form -> form
-                        .loginPage("/login")       // custom login page
-                        .usernameParameter("email") // ← bind Spring’s “username” to your “email” field
+                        .loginPage("/login")
+                        .usernameParameter("email")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/postLogin", true) // landing page after login
+                        .defaultSuccessUrl("/postLogin", true)
                         .permitAll()
                 )
-
-                // logout configuration
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login?logout")
