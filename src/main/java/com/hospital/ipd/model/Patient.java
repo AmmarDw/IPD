@@ -1,10 +1,14 @@
 package com.hospital.ipd.model;
 
-import jakarta.persistence.*;
+import java.util.List;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.List;
 
 @Getter
 @Setter
@@ -17,7 +21,7 @@ public class Patient {
 
     String name, email, password, room, bed;
 
-    int phone;
+    String phone; //  Changed from int to String — for same reasons as Employee
 
     @OneToMany(mappedBy="requestedBy")
     List<Task> requests;

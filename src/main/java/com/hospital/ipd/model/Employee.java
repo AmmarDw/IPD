@@ -1,10 +1,16 @@
 package com.hospital.ipd.model;
 
-import jakarta.persistence.*;
+import java.util.List;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.List;
 
 @Getter
 @Setter
@@ -14,10 +20,7 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer employeeId;
 
-
-    String name, email, password;
-
-    int phone;
+    String name, email, password, phone; // Changed phone from int to String to support formatting, country codes, and leading zeros
 
     double salary;
 
@@ -25,7 +28,7 @@ public class Employee {
     @JoinColumn(name="role_id")
     Role role;
 
-    boolean status;
+    boolean status; //  Kept as boolean to represent active/inactive status clearly
 
     @OneToMany(mappedBy="assignedTo")
     List<Task> tasks;
