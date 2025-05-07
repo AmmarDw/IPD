@@ -17,6 +17,7 @@
             justify-content: center;
             align-items: center;
         }
+
     </style>
 </head>
 <body class="min-h-screen bg-white font-sans">
@@ -49,7 +50,7 @@
         <h1 class="text-4xl font-bold text-gray-900 mb-6">Manage Request Options</h1>
 
         <!-- Filter Form -->
-        <form th:action="@{/manageRequestOptions}" method="get" class="mb-6 flex flex-wrap gap-4 items-end">
+        <form th:action="@{/manageRequestOptions}" method="post" class="mb-6 flex flex-wrap gap-4 items-end">
             <div>
                 <label class="block text-gray-700 mb-1">Priority</label>
                 <div class="flex gap-3">

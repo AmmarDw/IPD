@@ -10,6 +10,7 @@
             href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter:wght@400;500;700;900&amp;family=Noto+Sans:wght@400;500;700;900"
     />
     <title>Clinic Assist – View All Employees</title>
+
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 </head>
 <body class="min-h-screen bg-white font-sans">
@@ -30,11 +31,10 @@
                 <!-- Monitor Employees Icon -->
                 Monitor Employees
             </a>
-            <a th:href="@{/manage_request_options}"
-               class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-gray-200"
-               th:classappend="${currentUri == '/manage_request_options'} ? ' bg-blue-100 text-blue-700 font-medium' : ''">
-                <!-- Manage Request Options Icon -->
-                Manage Request Options
+            <a th:href="@{/manageRequestOptions}"
+            class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-gray-200"
+            th:classappend="${currentUri == '/manageRequestOptions'} ? ' bg-blue-100 text-blue-700 font-medium' : ''">
+            Manage Request Options
             </a>
         </div>
         <a th:href="@{/logout}"

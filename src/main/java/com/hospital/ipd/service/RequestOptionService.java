@@ -69,6 +69,7 @@ public class RequestOptionService {
     }
 
     // create findAllOptions: findAll from RequestOptionRepository
+
     /**
  * Fetch all RequestOptions without any filtering.
  */

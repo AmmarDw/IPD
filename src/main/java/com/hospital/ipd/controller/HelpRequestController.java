@@ -41,6 +41,7 @@ public class HelpRequestController {
     @Autowired
     private RoleService roleService;
 
+
     @GetMapping("/manageRequestOptions")
     public String manageRequestOptions(
             @RequestParam(name = "priority", required = false) List<String> rawPriorities,
@@ -160,6 +161,7 @@ public class HelpRequestController {
     // return html page injected with the requestOptions returned from the service
     // use thymleaf for rendering the data sent from the controller
     // copy the manageRequestOptions.html and viewAllEmployees.html to gbt and ask for the same table layout
+
     @GetMapping("/requestOptions")
     public String viewRequestOptions(Model model) {
         List<RequestOption> options = requestOptionService.findAllOptions();
@@ -193,7 +195,5 @@ public String requestHelp(
 
     return "redirect:/requestOptions";
 }
-
-
 
 }

@@ -9,4 +9,5 @@ public interface RoleRepository extends JpaRepository<Role, Integer> {
      * All roles whose name is not exactly "ADMIN"
      */
     List<Role> findAllByRoleNameNot(String name);
+
 }

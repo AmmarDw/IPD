@@ -21,6 +21,8 @@ public class EmployeeService {
      * @param status  1 for working, 0 for off-duty, null → both
      */
     public List<Employee> findFiltered(List<Integer> roleIds, Integer status) {
+
+
         boolean hasRoleFilter = roleIds != null && !roleIds.isEmpty();
         boolean hasStatusFilter = status != null;
         boolean statusBool = hasStatusFilter && status == 1;
@@ -40,4 +42,18 @@ public class EmployeeService {
     // TODO Salem task
     // create findEmployee that calls the EmployeeRepository proper function
     // - maybe findByEmployeeId or getEmployeeByEmployeeId ask gbt for it
+
+
+    // Salem task - find employee by ID (updated to use Integer instead of Long)
+    public Employee findEmployee(Integer employeeId) {
+        return employeeRepository.findByEmployeeId(employeeId);
+    }
+
+    // Additional method needed for DashboardController
+    public Employee findEmployeeByEmail(String email) {
+        return employeeRepository.findByEmail(email);
+    }
+
+
+
 }

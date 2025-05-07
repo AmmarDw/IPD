@@ -32,11 +32,12 @@ public class RoleService {
         Optional<Role> role = roleRepository.findById(roleId);
         return role.orElse(null);
     }
+
     public Role getRoleByName(String roleName) {
     return roleRepository.findAll().stream()
             .filter(r -> r.getRoleName().equalsIgnoreCase(roleName))
             .findFirst()
             .orElse(null);
-}
+    }
 
 }

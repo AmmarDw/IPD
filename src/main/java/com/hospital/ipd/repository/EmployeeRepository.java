@@ -10,10 +10,14 @@ import java.util.List;
 public interface EmployeeRepository extends JpaRepository<Employee,Integer> {
     Employee findByEmail(String email);
 
+
     /**
      * No filters, just all employees sorted by ID
      */
     List<Employee> findAllByOrderByEmployeeId();
+
+    Employee findByEmployeeId(int employeeId);
+
 
     /**
      * Filter by on-duty status, sorted by ID

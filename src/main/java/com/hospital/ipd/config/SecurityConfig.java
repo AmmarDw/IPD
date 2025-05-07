@@ -15,6 +15,7 @@ public class SecurityConfig {
      * 1) PasswordEncoder bean for hashing and verifying passwords.
      */
     @Bean
+
     public PasswordEncoder passwordEncoder() {
         // Explicitly set strength to 10 to match $2a$10$ hashes
         return new BCryptPasswordEncoder(10);
