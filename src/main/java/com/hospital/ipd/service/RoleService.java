@@ -30,4 +30,5 @@ public class RoleService {
         Optional<Role> role = roleRepository.findById(roleId);
         return role.orElse(null);
     }
+
 }

@@ -15,6 +15,7 @@ public class SecurityConfig {
      * 1) PasswordEncoder bean for hashing and verifying passwords.
      */
     @Bean
+
     public PasswordEncoder passwordEncoder() {
         // Use BCrypt for secure password hashing
         return new BCryptPasswordEncoder();

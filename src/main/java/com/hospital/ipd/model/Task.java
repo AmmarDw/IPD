@@ -14,6 +14,7 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer taskId;
 
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "option_id")
     private RequestOption requestOption;

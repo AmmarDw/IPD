@@ -18,6 +18,7 @@ public class AuthController {
 
     // Spring Security handles POST /login
 
+
     /**
      * Role–based post-login landing.
      */
