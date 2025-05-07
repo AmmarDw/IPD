@@ -68,4 +68,9 @@ public class RequestOptionService {
     }
 
     // create findAllOptions: findAll from RequestOptionRepository
+
+    public List<RequestOption> findAllOptions() {
+        return requestOptionRepository.findAll();
+    }
+
 }

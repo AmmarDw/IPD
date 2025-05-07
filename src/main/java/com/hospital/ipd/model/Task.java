@@ -14,19 +14,19 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer taskId;
 
-    @ManyToOne
-    @JoinColumn(name="option_id")
-    RequestOption requestOption;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "option_id")
+    private RequestOption requestOption;
 
     LocalDateTime timestamp;
 
     boolean status;
 
-    @ManyToOne
-    @JoinColumn(name="employee_id")
-    Employee assignedTo;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "employee_id")
+    private Employee assignedTo;
 
-    @ManyToOne
-    @JoinColumn(name="patient_id")
-    Patient requestedBy;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "patient_id")
+    private Patient requestedBy;
 }

@@ -1,33 +1,74 @@
 package com.hospital.ipd.controller;
 
+import com.hospital.ipd.model.Employee;
+import com.hospital.ipd.model.Task;
+import com.hospital.ipd.service.EmployeeService;
+import com.hospital.ipd.service.TaskService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class DashboardController {
 
+    @Autowired
+    private TaskService taskService;
+
+    @Autowired
+    private EmployeeService employeeService;
+
     /**
-     * Shows the Admin Dashboard page,
-     * with links to Manage Request Options and Monitor Employees.
+     * Shows the Admin Dashboard page.
      */
     @GetMapping("/adminDashboard")
     public String adminDashboard(Model model, HttpServletRequest request) {
-        // ← add currentUri
         model.addAttribute("currentUri", request.getRequestURI());
         return "adminDashboard";
     }
 
-    // TODO Salem task
-    // create @GetMapping("/employeeTasksDashboard")
-    // should take an employeeId parameter @RequestParam(required = false, name = "employeeId")
-    // should take an authentication parameter Authentication auth
-    // refer to AuthController to check how - part of - ROLE based access is implemented
-    // call employeeTasks(id) from the TaskService. create autowired taskService object
-    // if ROLE is employee get his id from the auth as well. or mostly you should take his id from the session
-    // add tasks returned from the service to the page through (model.addAttribute)
-    // now we need to get the employee object from the EmployeeService. add the employee object through (model.addAttribute)
-    // now create the html page employeeTasksDashboard.html that contains the employee name, role, and status at the top
-    // and the tasks table under it. give gbt the viewAllEmployees.html and manageRequestOptions.html pages to generate the required table that has the same styling as in those pages
+    /**
+     * Shows the Employee Tasks Dashboard page.
+     */
+    @GetMapping("/employeeTasksDashboard")
+    public String employeeTasksDashboard(
+            @RequestParam(required = false, name = "employeeId") Integer employeeId,
+            Authentication auth,
+            Model model) {
+
+        {
+            try {
+                // Existing logic here
+            } catch (Exception e) {
+                model.addAttribute("error", "Failed to load tasks: " + e.getMessage());
+                return "error-page"; // Create a simple error.html template
+            }
+        }
+
+        // Get current user's role
+        boolean isAdmin = auth.getAuthorities().stream()
+                .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_ADMIN"));
+
+        // For non-admins, force their own employee ID
+        if (!isAdmin) {
+            Employee currentEmployee = employeeService.findEmployeeByEmail(auth.getName());
+            employeeId = currentEmployee.getEmployeeId();
+        }
+
+        // Get tasks and employee info
+        List<Task> tasks = taskService.employeeTasks(employeeId);
+        Employee employee = employeeService.findEmployee(employeeId);
+
+        // Add to model
+        model.addAttribute("tasks", tasks);
+        model.addAttribute("employee", employee);
+
+        return "employeeTasksDashboard";
+    }
 }
