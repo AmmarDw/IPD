@@ -10,4 +10,5 @@ public class IpdSmartNurseCallApplication {
 		SpringApplication.run(IpdSmartNurseCallApplication.class, args);
 	}
 
+
 }
