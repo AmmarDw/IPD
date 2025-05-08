@@ -43,12 +43,12 @@ public class AuthController {
     @GetMapping("/postLogin")
     public String postLoginRedirect(Authentication auth) {
         if (auth == null || auth.getAuthorities() == null) {
-            System.out.println("[DEBUG] ❌ No authentication found or roles missing.");
+            System.out.println("[DEBUG] - No authentication found or roles missing.");
             return "redirect:/login?error";
         }
 
         Collection<? extends GrantedAuthority> roles = auth.getAuthorities();
-        System.out.println("[DEBUG] ✅ Logged in with roles: " + roles);
+        System.out.println("[DEBUG] - Logged in with roles: " + roles);
 
         if (roles.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
             return "redirect:/adminDashboard";
@@ -62,7 +62,7 @@ public class AuthController {
             return "redirect:/requestOptions";
         }
 
-        System.out.println("[DEBUG] ⚠️ No matching role found. Redirecting to login.");
+        System.out.println("[DEBUG] - No matching role found. Redirecting to login.");
         return "redirect:/login?error";
     }
 
@@ -93,7 +93,7 @@ public String signup(HttpServletRequest request) {
         Role role = roleService.getRoleByName(userType);
 
         if (role == null) {
-            System.out.println("[ERROR] ❌ Invalid role type: " + userType);
+            System.out.println("[ERROR]  Invalid role type: " + userType);
             return "redirect:/signup?error=invalid_role";
         }
 
@@ -102,7 +102,7 @@ public String signup(HttpServletRequest request) {
         employee.setEmail(email);
         employee.setPassword(passwordEncoder.encode(password));
         employee.setPhone(phone);
-        employee.setStatus(true); // ✅ Use boolean true
+        employee.setStatus(true); //  Use boolean true
         employee.setSalary(Double.parseDouble(salaryStr));
         employee.setRole(role);
         empRepo.save(employee);

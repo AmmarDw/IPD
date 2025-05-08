@@ -1,10 +1,16 @@
 package com.hospital.ipd.model;
 
-import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -12,16 +18,23 @@ import java.time.LocalDateTime;
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer taskId;
-
+    private Integer taskId;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "option_id")
     private RequestOption requestOption;
 
-    LocalDateTime timestamp;
+    /** when the patient requested it */
+    private LocalDateTime timestamp;
 
-    boolean status;
+    /** when the employee clicked “Start” */
+    private LocalDateTime startedAt;
+
+    /** true if work is in progress */
+    private boolean inProgress;
+
+    /** true if work is completed */
+    private boolean status;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "employee_id")
@@ -30,4 +43,14 @@ public class Task {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "patient_id")
     private Patient requestedBy;
+
+    // /** (set on completion) */
+    // @ManyToOne(fetch = FetchType.EAGER)
+    // @JoinColumn(name = "completed_by_id")
+    // private Employee completedBy;
+
+    /** when the task was completed */
+    private LocalDateTime completedAt;
+
 }
+
