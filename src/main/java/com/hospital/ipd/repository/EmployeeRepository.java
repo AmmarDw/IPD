@@ -1,10 +1,12 @@
 package com.hospital.ipd.repository;
 
-import com.hospital.ipd.model.Employee;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import com.hospital.ipd.model.Employee;
+import com.hospital.ipd.model.Role;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee,Integer> {
@@ -14,7 +16,7 @@ public interface EmployeeRepository extends JpaRepository<Employee,Integer> {
      * No filters, just all employees sorted by ID
      */
     List<Employee> findAllByOrderByEmployeeId();
-
+    Employee findByEmployeeId(int employeeId);
     /**
      * Filter by on-duty status, sorted by ID
      */
@@ -29,5 +31,10 @@ public interface EmployeeRepository extends JpaRepository<Employee,Integer> {
      * Filter by both role IDs and status, sorted by ID
      */
     List<Employee> findByRole_RoleIdInAndStatusOrderByEmployeeId(List<Integer> roleIds, boolean status);
+    
+
+    List<Employee> findByRoleAndStatus(Role role, boolean status);
+
+
 
 }

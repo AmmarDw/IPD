@@ -1,79 +1,120 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <title>Signup</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" />
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+  <link
+    rel="stylesheet"
+    as="style"
+    onload="this.rel='stylesheet'"
+    href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter:wght@400;500;700;900&amp;family=Noto+Sans:wght@400;500;700;900"
+  />
+  <title>INPATIENT CARE MANAGEMENT SYSTEM – Sign Up</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 </head>
-<body class="min-h-screen bg-white font-sans">
-<div class="flex items-center justify-center min-h-screen px-4">
-    <div class="w-full max-w-md bg-white p-8 rounded-xl shadow-lg">
-        <h2 class="text-3xl font-bold text-center mb-2 text-gray-900">Create Your Account</h2>
-        <p class="text-center text-gray-600 mb-6">Sign up to access your dashboard</p>
+<body class="min-h-screen bg-white font-sans flex flex-col">
 
-        <form th:action="@{/signup}" method="post" class="space-y-5">
-            <div>
-                <label class="block text-sm font-medium text-gray-900 mb-1">Name</label>
-                <input type="text" name="name" required
-                       class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
-            </div>
-
-            <div>
-                <label class="block text-sm font-medium text-gray-900 mb-1">Email</label>
-                <input type="email" name="email" required
-                       class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
-            </div>
-
-            <div>
-                <label class="block text-sm font-medium text-gray-900 mb-1">Password</label>
-                <input type="password" name="password" required
-                       class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
-            </div>
-
-            <div>
-                <label class="block text-sm font-medium text-gray-900 mb-1">Phone</label>
-                <input type="tel" name="phone" pattern="[0-9]{7,15}" inputmode="numeric" required
-                       title="Enter a valid phone number (7 to 15 digits)"
-                       class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
-            </div>
-
-            <div>
-                <label class="block text-sm font-medium text-gray-900 mb-1">User Type</label>
-                <select name="userType" id="userType" onchange="toggleSalary()" required
-                        class="w-full border border-gray-300 rounded-lg p-3 bg-white text-gray-900">
-                    <option value="PATIENT">Patient</option>
-                    <option value="DOCTOR">Doctor</option>
-                    <option value="NURSE">Nurse</option>
-                    <option value="HOUSEKEEPING">Housekeeping</option>
-                </select>
-            </div>
-
-            <div id="salaryField" class="hidden">
-                <label class="block text-sm font-medium text-gray-900 mb-1">Salary</label>
-                <input type="text" name="salary" pattern="\\d+(\\.\\d{1,2})?" 
-                       title="Enter a valid number (e.g. 5000 or 5000.50)"
-                       class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
-            </div>
-
-            <button type="submit"
-                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition">
-                Sign Up
-            </button>
-        </form>
+  <!-- header with logo/title -->
+  <header class="flex items-center border-b border-gray-200 px-10 py-4">
+    <div class="flex items-center gap-4">
+      <svg class="w-6 h-6 text-gray-900" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z"
+          fill="currentColor"
+        />
+      </svg>
+      <h1 class="text-xl font-bold text-gray-900">INPATIENT CARE MANAGEMENT SYSTEM</h1>
     </div>
-</div>
+  </header>
 
-<script>
+  <!-- signup form -->
+  <main class="flex-grow flex items-center justify-center px-4 py-12">
+    <div class="w-full max-w-md bg-white p-8 rounded-xl shadow-lg">
+      <h2 class="text-3xl font-bold text-center text-gray-900 mb-2">Create Your Account</h2>
+      <p class="text-center text-gray-600 mb-6">
+        Sign up to start using the system
+      </p>
+
+      <form th:action="@{/signup}" method="post" class="space-y-5">
+        <div>
+          <label class="block text-sm font-medium text-gray-900 mb-1">Name</label>
+          <input
+            type="text" name="name" required
+            class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-900 mb-1">Email</label>
+          <input
+            type="email" name="email" required
+            class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-900 mb-1">Password</label>
+          <input
+            type="password" name="password" required
+            class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-900 mb-1">Phone</label>
+          <input
+            type="tel" name="phone" required pattern="[0-9]{7,15}" inputmode="numeric"
+            title="Enter 7 to 15 digits"
+            class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-900 mb-1">User Type</label>
+          <select
+            name="userType" id="userType" onchange="toggleSalary()" required
+            class="w-full border border-gray-300 rounded-lg p-3 bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          >
+            <option value="PATIENT">Patient</option>
+            <option value="DOCTOR">Doctor</option>
+            <option value="NURSE">Nurse</option>
+            <option value="ADMIN">Admin</option>
+            <option value="HOUSEKEEPING">Housekeeping</option>
+          </select>
+        </div>
+
+        <div id="salaryField" class="hidden">
+          <label class="block text-sm font-medium text-gray-900 mb-1">Salary</label>
+          <input
+            type="text" name="salary" pattern="\d+(\.\d{1,2})?"
+            title="e.g. 5000 or 5000.50"
+            class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          />
+        </div>
+
+        <button
+          type="submit"
+          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition"
+        >
+          Sign Up
+        </button>
+
+        <p class="text-center text-gray-600 mt-4">
+          Already have an account?
+          <a th:href="@{/login}" class="text-blue-600 hover:underline font-medium">Sign In</a>
+        </p>
+      </form>
+    </div>
+  </main>
+
+  <script>
     function toggleSalary() {
-        const userType = document.getElementById("userType").value;
-        const salaryField = document.getElementById("salaryField");
-        salaryField.classList.toggle("hidden", userType === "PATIENT");
+      const show = document.getElementById("userType").value !== "PATIENT";
+      document.getElementById("salaryField").classList.toggle("hidden", !show);
     }
-
-    toggleSalary(); // call on load
-</script>
+    toggleSalary();
+  </script>
 </body>
 </html>

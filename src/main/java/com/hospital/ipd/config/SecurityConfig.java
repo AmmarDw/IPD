@@ -57,18 +57,21 @@ public class SecurityConfig {
                                 "/addRequestOption",
                                 "/updateRequestOptionForm",
                                 "/updateRequestOption",
-                                "/deleteRequestOption")
-                             //   "/employeeTasksDashboard")
+                                "/deleteRequestOption" )
+                             // "/employeeTasksDashboard")
                         .hasRole("ADMIN")
 
                         // medical staff & admin endpoints
                         .requestMatchers(
-                                "/employeeTasksDashboard",
+                             //   "/employeeTasksDashboard",
                                 "/viewTask",
                                 "/startTask",
                                 "/completeTask",
                                 "/updateEmployeeStatus"
-                        ).hasAnyRole("NURSE", "DOCTOR", "HOUSEKEEPING")
+                        ).hasAnyRole("NURSE", "DOCTOR", "HOUSEKEEPING","ADMIN")
+
+                        /// admin and medical staff
+                        .requestMatchers( "/employeeTasksDashboard").hasAnyRole( "NURSE", "ADMIN", "DOCTOR", "HOUSEKEEPING")
 
                         // patient & nurse endpoints
                         .requestMatchers("/requestOptions", "/requestHelp")

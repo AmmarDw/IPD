@@ -1,0 +1,7 @@
+package com.hospital.ipd.model;
+
+public enum TaskStatus {
+    PENDING,       // just created
+    IN_PROGRESS,   // staff has “started” it
+    COMPLETED      // staff has “completed” it
+}

@@ -1,10 +1,12 @@
 package com.hospital.ipd.service;
 
-import com.hospital.ipd.model.Employee;
-import com.hospital.ipd.repository.EmployeeRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.List;
+
+import com.hospital.ipd.model.Employee;
+import com.hospital.ipd.repository.EmployeeRepository;
 
 @Service
 public class EmployeeService {
@@ -12,13 +14,9 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-
     /**
      * Returns all employees, optionally filtering by a set of role IDs
      * and/or status (1 = working, 0 = off-duty), sorted by employeeId.
-     *
-     * @param roleIds list of role IDs to include (null or empty → all roles)
-     * @param status  1 for working, 0 for off-duty, null → both
      */
     public List<Employee> findFiltered(List<Integer> roleIds, Integer status) {
         boolean hasRoleFilter = roleIds != null && !roleIds.isEmpty();
@@ -37,7 +35,33 @@ public class EmployeeService {
         return employeeRepository.findByRole_RoleIdInAndStatusOrderByEmployeeId(roleIds, statusBool);
     }
 
-    // TODO Salem task
-    // create findEmployee that calls the EmployeeRepository proper function
-    // - maybe findByEmployeeId or getEmployeeByEmployeeId ask gbt for it
+    /**
+     * Fetch a single employee by their numeric ID.
+     * Added to support DashboardController.findById usage.
+     */
+    public Employee findById(Integer employeeId) {
+        return employeeRepository.findById(employeeId).orElse(null);
+    }
+
+    /**
+     * Fetch a single employee by their email.
+     * Added to support DashboardController.findByEmail usage.
+     */
+    public Employee findByEmail(String email) {
+        return employeeRepository.findByEmail(email);
+    }
+
+    /**
+     * Legacy method retaining semantic clarity.
+     */
+    public Employee findEmployee(Integer employeeId) {
+        return employeeRepository.findByEmployeeId(employeeId);
+    }
+
+    /**
+     * Alternate lookup by email.
+     */
+    public Employee findEmployeeByEmail(String email) {
+        return employeeRepository.findByEmail(email);
+    }
 }
