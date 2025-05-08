@@ -66,4 +66,20 @@ public class EmployeeService {
     public Employee findEmployeeByEmail(String email) {
         return employeeRepository.findByEmail(email);
     }
+
+    /**
+     * Updates the status of an employee (e.g., active/inactive).
+     * @param employeeId ID of the employee to update.
+     * @param newStatus New status value (true for active, false for inactive).
+     * @return Updated Employee object, or null if employee not found.
+     */
+    public Employee updateStatus(Integer employeeId, boolean newStatus) {
+        Employee employee = employeeRepository.findById(employeeId).orElse(null);
+        if (employee == null) {
+            return null;
+        }
+        employee.setStatus(newStatus);
+        return employeeRepository.save(employee);
+    }
+
 }

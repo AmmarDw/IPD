@@ -50,6 +50,15 @@
         <span th:text="${employee.status} ? 'Working' : 'Off-duty'"
               th:classappend="${employee.status} ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'"
               class="inline-block px-2 py-1 rounded-full text-xs font-medium"></span>
+
+        <!-- Toggle Status Button -->
+        <form th:action="@{/employees/{id}/toggle-status(id=${employee.employeeId})}" method="post" class="mt-2">
+          <input type="hidden" name="newStatus" th:value="${!employee.status}" />
+          <button type="submit"
+                  class="mt-1 inline-block bg-blue-500 hover:bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded">
+            Toggle Status
+          </button>
+        </form>
       </div>
     </div>
   </div>

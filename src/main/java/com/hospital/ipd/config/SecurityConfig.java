@@ -67,7 +67,7 @@ public class SecurityConfig {
                                 "/startTask",
                                 "/completeTask",
                                 "/updateEmployeeStatus"
-                        ).hasAnyRole("NURSE", "DOCTOR", "HOUSEKEEPING","ADMIN")
+                        ).hasAnyRole("NURSE", "DOCTOR", "HOUSEKEEPING")
 
                         /// admin and medical staff
                         .requestMatchers( "/employeeTasksDashboard").hasAnyRole( "NURSE", "ADMIN", "DOCTOR", "HOUSEKEEPING")
