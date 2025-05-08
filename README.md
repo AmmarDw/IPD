@@ -102,4 +102,14 @@ The student should be able to:
 - Draw insights and engineering-judgment conclusions.
 - Prepare detailed reports documenting methods, analysis & outcomes.
 
+##  Authors & Acknowledgments
+
+### Team Members
+- **Osamah Khaled Al-Suraimi** (4211315)
+- **Dwidari, A. Ammar** (4311418)
+- **Salem Hussameldeen Shurrab** (4211168)
+- **Hamidullah Abduljabar, S. Saifudin** (4211401)
+
+### Instructor
+- **Dr. Abdurazzag Almiladi**
 
