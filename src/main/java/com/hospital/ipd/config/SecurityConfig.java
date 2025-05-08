@@ -58,7 +58,7 @@ public class SecurityConfig {
                                 "/addRequestOption",
                                 "/updateRequestOptionForm",
                                 "/updateRequestOption",
-                                "/deleteRequestOption"),
+                                "/deleteRequestOption",
                                 "/employeeTasksDashboard")
                         .hasRole("ADMIN")
 
