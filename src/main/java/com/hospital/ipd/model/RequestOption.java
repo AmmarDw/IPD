@@ -11,6 +11,7 @@ import java.util.List;
 @Entity
 public class RequestOption {
     @Id
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer optionId;
 

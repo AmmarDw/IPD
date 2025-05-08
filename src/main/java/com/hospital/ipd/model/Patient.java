@@ -18,6 +18,7 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer patientId;
 
+
     String name, email, password, room, bed;
 
     String phone; //  Changed from int to String — for same reasons as Employee

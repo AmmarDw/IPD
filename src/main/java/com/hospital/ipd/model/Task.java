@@ -52,5 +52,5 @@ public class Task {
     /** when the task was completed */
     private LocalDateTime completedAt;
 
-    // Lombok @Getter/@Setter generate all necessary getters and setters
 }
+

@@ -52,6 +52,7 @@ public class HelpRequestController {
     // ------------------------------------------------
     // Admin: List & filter all RequestOptions
     // ------------------------------------------------
+
     @GetMapping("/manageRequestOptions")
     public String manageRequestOptions(
             @RequestParam(name = "priority", required = false) List<String> rawPriorities,
@@ -141,6 +142,7 @@ public class HelpRequestController {
     // ------------------------------------------------
     // Patient: View available help options
     // ------------------------------------------------
+
     @GetMapping("/requestOptions")
     public String viewRequestOptions(Model model) {
         model.addAttribute("options", requestOptionService.findAllOptions());

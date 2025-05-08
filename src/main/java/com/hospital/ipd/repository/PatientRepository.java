@@ -8,5 +8,4 @@ import com.hospital.ipd.model.Patient;
 @Repository
 public interface PatientRepository extends JpaRepository<Patient,Integer> {
     Patient findByEmail(String email);
-    
 }

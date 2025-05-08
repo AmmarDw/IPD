@@ -19,6 +19,8 @@ public class EmployeeService {
      * and/or status (1 = working, 0 = off-duty), sorted by employeeId.
      */
     public List<Employee> findFiltered(List<Integer> roleIds, Integer status) {
+
+
         boolean hasRoleFilter = roleIds != null && !roleIds.isEmpty();
         boolean hasStatusFilter = status != null;
         boolean statusBool = hasStatusFilter && status == 1;
